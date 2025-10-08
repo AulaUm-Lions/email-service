@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { AppError } from '../errors/AppError';
 
 class ExampleController
 {
@@ -10,7 +11,13 @@ class ExampleController
 
     testError(req: Request, res: Response)
     {
-        throw new Error('Teste de erro.');
+        try {
+            throw new AppError('Erro padrão', 'APP_INFO', 401);
+        } catch (err) {
+            throw new AppError('Erro padrão 2', 'APP_INFO', 402, req.body, { cause: err as Error });
+        }
+
+        // throw new Error('Teste de erro.');
     }
 }
 
