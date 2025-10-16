@@ -1,9 +1,14 @@
-import { Router } from 'express';
-import { exampleRoutes } from './example.routes';
+// src/routes/routes.ts
+import { Router } from "express";
+import emailRoutes from "./email.routes";
 
-const routes: Router = Router();
+const routes = Router();
 
-routes.use(exampleRoutes);
+routes.use("/email", emailRoutes);
 
+// Exemplo: rota de status do serviço
+routes.get("/health", (req, res) => {
+  res.json({ status: "ok", message: "Email service funcionando!" });
+});
 
 export { routes };

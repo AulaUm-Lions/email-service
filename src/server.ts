@@ -1,6 +1,19 @@
-import { app } from './app';
-import { config } from './config/env';
+import dotenv from "dotenv";
+dotenv.config();
 
-app.listen(config.app_port, () => {
-    console.log(`Servidor "${config.app_name}" iniciado na porta: ${config.app_port}`);
-});
+import { initMailTransport, configureTemplateEngine } from "./config/mailConfig";
+import { app } from "./app";
+
+async function bootstrap() {
+  try {
+    await initMailTransport();
+    await configureTemplateEngine();
+
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
+  } catch (err) {
+    console.error("❌ Erro ao iniciar o servidor:", err);
+  }
+}
+
+bootstrap();

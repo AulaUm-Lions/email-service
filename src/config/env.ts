@@ -1,18 +1,28 @@
-import dotenv from 'dotenv';
-
-console.log('NODE_ENV', process.env.NODE_ENV);
-
-dotenv.config({
-    path: process.env.NODE_ENV != '' && process.env.NODE_ENV != undefined ? `.env.${process.env.NODE_ENV}` : '.env'
-});
+import dotenv from "dotenv";
+dotenv.config();
 
 export const config = {
-    app_name: process.env.APP_NAME,
-    app_port: process.env.APP_PORT,
+  node_env: process.env.NODE_ENV || "dev",
 
-    db_host: process.env.DB_HOST,
-    db_port: process.env.DB_PORT,
-    db_database: process.env.DB_DATABASE,
-    db_user: process.env.DB_USER,
-    db_password: process.env.DB_PASSWORD,
+  // 🔹 Configuração do servidor
+  port: Number(process.env.PORT) || 4000,
+
+  // 🔹 Configuração do banco de dados
+  db_host: process.env.DB_HOST || "localhost",
+  db_port: Number(process.env.DB_PORT) || 5432,
+  db_database: process.env.DB_DATABASE || "meu_banco",
+  db_user: process.env.DB_USER || "postgres",
+  db_password: process.env.DB_PASSWORD || "senha123",
+
+  // 🔹 Configuração de SMTP
+  smtp_host: process.env.SMTP_HOST,
+  smtp_port: Number(process.env.SMTP_PORT) || 587,
+  smtp_user: process.env.SMTP_USER,
+  smtp_pass: process.env.SMTP_PASS,
+  smtp_secure: process.env.SMTP_SECURE === "true",
+
+  // 🔹 Configurações adicionais
+  mail_from_name: process.env.MAIL_FROM_NAME || "MeuApp",
+  mail_from_email: process.env.MAIL_FROM_EMAIL || "no-reply@meuapp.com",
+  app_base_url: process.env.APP_BASE_URL || "http://localhost:4000",
 };
