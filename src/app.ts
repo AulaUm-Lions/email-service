@@ -9,7 +9,11 @@ import { errorHandling } from "./middleware/error-handling.middleware";
 const app: Express = express();
 
 app.use(cid);
-app.use(cors());
+app.use(cors({
+    origin: ["*"], // domínio(s) permitido(s)
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(log);
