@@ -1,10 +1,23 @@
-import morgan from 'morgan';
-import fs from 'fs';
-import path from 'path';
+// src/middleware/log.middleware.ts
+import morgan from "morgan";
+import fs from "fs";
+import path from "path";
 
-const fileLog = fs.createWriteStream(
-  path.join(__dirname, '..', 'storage', 'access.log'),
-  { flags: 'a' }
-);
+// Cria o caminho para os logs
+const logDir = path.join(__dirname, "..", "storage");
 
-export const log = morgan('combined', { stream: fileLog });
+// Garante que a pasta exista
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir, { recursive: true });
+}
+
+// Cria o stream de escrita (somente para dev)
+const fileLog = fs.createWriteStream(path.join(logDir, "access.log"), {
+  flags: "a",
+});
+
+// Usa o morgan só se **não** estiver em produção
+export const log =
+  process.env.NODE_ENV === "production"
+    ? (req: any, res: any, next: any) => next() // middleware vazio
+    : morgan("combined", { stream: fileLog });
