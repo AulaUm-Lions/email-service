@@ -6,6 +6,9 @@ import { cid } from "./middleware/cid.middleware";
 import { log } from "./middleware/log.middleware";
 import { errorHandling } from "./middleware/error-handling.middleware";
 
+import swagger from 'swagger-ui-express';
+import * as swaggerDocument from './docs/swagger.json';
+
 const app: Express = express();
 
 app.use(cid);
@@ -17,6 +20,20 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(log);
+
+app.get('/swagger.json', (req, res) =>{
+  res.send(swaggerDocument)
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).send('API está funcionando!')
+});
+
+app.use('/api-docs', swagger.serve, swagger.setup(null, {
+  swaggerOptions: {
+    url: '/swagger.json'
+  }
+}));
 
 // Configuração das rotas
 app.use("/api", routes); // ✅ prefixo opcional para padronizar
