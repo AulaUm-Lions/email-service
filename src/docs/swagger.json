@@ -1,0 +1,105 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Minha API TypeScript (Manual)",
+      "version": "1.0.0",
+      "description": "Documentação da API definida manualmente em JSON."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/"
+      }
+    ],
+    "components": {
+      "schemas": {
+          "UserCreateDto": {
+              "type": "object",
+              "required": ["email", "password"],
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "jean.mello@exemplo.com"
+                  },
+                  "password": {
+                  "type": "string",
+                  "format": "password",
+                  "minLength": 8,
+                  "example": "senhaSegura123"
+                  }
+              }
+          },
+          "UserResponseDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+                  },
+                  "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "jean.mello@exemplo.com"
+                  },
+                  "name": {
+                      "type": "string",
+                      "example": "Jean Mello"
+                  },
+                  "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                  }
+              }
+          }
+      }
+    },
+    "paths": {
+      "/health": {
+        "get": {
+          "summary": "Verifica a saúde da API",
+          "tags": [
+            "Geral"
+          ],
+          "responses": {
+            "200": {
+              "description": "A API está saudável."
+            }
+          }
+        }
+      },
+      "/user": {
+          "post": {
+              "summary": "Cadastra um novo usuário",
+              "tags": [
+                  "Usuário"
+              ],
+              "requestBody": {
+                  "required": true,
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/UserCreateDto"
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "201": {
+                      "description": "Usuário cadastro com sucesso!",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/UserResponseDto"
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                      "description": "Requisição inválida, faltando campos obrigatórios!"
+                  }
+              }
+          }
+      }
+    }
+  }
