@@ -7,46 +7,39 @@
     },
     "servers": [
       {
-        "url": "http://localhost:3000/"
+        "url": "http://localhost:4000/"
       }
     ],
     "components": {
       "schemas": {
-          "UserCreateDto": {
+          "EmailRequest": {
               "type": "object",
-              "required": ["email", "password"],
+              "required": ["to", "type", "variables"],
               "properties": {
-                  "email": {
+                  "to": {
                       "type": "string",
                       "format": "email",
                       "example": "jean.mello@exemplo.com"
                   },
-                  "password": {
-                  "type": "string",
-                  "format": "password",
-                  "minLength": 8,
-                  "example": "senhaSegura123"
+                  "type": {
+                    "type": "string",
+                    "format": "string",
+                    "example": "welcome"
+                  },
+                  "variables": {
+                    "type" : "object"
                   }
               }
           },
-          "UserResponseDto": {
+          "EmailResponse": {
               "type": "object",
               "properties": {
-                  "id": {
+                  "message": {
                       "type": "string",
-                      "format": "uuid",
-                      "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+                      "format": "message",
+                      "example": "Email enviado com sucesso"
                   },
-                  "email": {
-                      "type": "string",
-                      "format": "email",
-                      "example": "jean.mello@exemplo.com"
-                  },
-                  "name": {
-                      "type": "string",
-                      "example": "Jean Mello"
-                  },
-                  "createdAt": {
+                  "datasend": {
                       "type": "string",
                       "format": "date-time"
                   }
@@ -55,7 +48,7 @@
       }
     },
     "paths": {
-      "/health": {
+      "/api/health": {
         "get": {
           "summary": "Verifica a saúde da API",
           "tags": [
@@ -68,29 +61,29 @@
           }
         }
       },
-      "/user": {
+      "/api/email/send": {
           "post": {
-              "summary": "Cadastra um novo usuário",
+              "summary": "Enviar um email",
               "tags": [
-                  "Usuário"
+                  "Email"
               ],
               "requestBody": {
                   "required": true,
                   "content": {
                       "application/json": {
                           "schema": {
-                              "$ref": "#/components/schemas/UserCreateDto"
+                              "$ref": "#/components/schemas/EmailRequest"
                           }
                       }
                   }
               },
               "responses": {
-                  "201": {
-                      "description": "Usuário cadastro com sucesso!",
+                  "200": {
+                      "description": "Email enviado com sucesso!",
                       "content": {
                           "application/json": {
                               "schema": {
-                                  "$ref": "#/components/schemas/UserResponseDto"
+                                  "$ref": "#/components/schemas/EmailResponse"
                               }
                           }
                       }
