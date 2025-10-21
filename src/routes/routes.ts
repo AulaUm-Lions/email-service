@@ -1,6 +1,6 @@
 // src/routes/routes.ts
 import { Router } from "express";
-import emailRoutes from "./email.routes";
+import emailRoutes from "./mail.routes";
 
 const routes = Router();
 

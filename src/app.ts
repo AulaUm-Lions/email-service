@@ -25,9 +25,9 @@ app.get('/swagger.json', (req, res) =>{
   res.send(swaggerDocument)
 });
 
-app.get('/health', (req, res) => {
-  res.status(200).send('API está funcionando!')
-});
+// app.get('/health', (req, res) => {
+//   res.status(200).send('API está funcionando!')
+// });
 
 app.use('/api-docs', swagger.serve, swagger.setup(null, {
   swaggerOptions: {
