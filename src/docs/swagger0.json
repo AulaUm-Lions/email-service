@@ -1,0 +1,98 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Minha API TypeScript (Manual)",
+      "version": "1.0.0",
+      "description": "Documentação da API definida manualmente em JSON."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4000/"
+      }
+    ],
+    "components": {
+      "schemas": {
+          "EmailRequest": {
+              "type": "object",
+              "required": ["to", "type", "variables"],
+              "properties": {
+                  "to": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "jean.mello@exemplo.com"
+                  },
+                  "type": {
+                    "type": "string",
+                    "format": "string",
+                    "example": "welcome"
+                  },
+                  "variables": {
+                    "type" : "object"
+                  }
+              }
+          },
+          "EmailResponse": {
+              "type": "object",
+              "properties": {
+                  "message": {
+                      "type": "string",
+                      "format": "message",
+                      "example": "Email enviado com sucesso"
+                  },
+                  "datasend": {
+                      "type": "string",
+                      "format": "date-time"
+                  }
+              }
+          }
+      }
+    },
+    "paths": {
+      "/api/health": {
+        "get": {
+          "summary": "Verifica a saúde da API",
+          "tags": [
+            "Geral"
+          ],
+          "responses": {
+            "200": {
+              "description": "A API está saudável."
+            }
+          }
+        }
+      },
+      "/api/email/send": {
+          "post": {
+              "summary": "Enviar um email",
+              "tags": [
+                  "Email"
+              ],
+              "requestBody": {
+                  "required": true,
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/EmailRequest"
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Email enviado com sucesso!",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/EmailResponse"
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                      "description": "Requisição inválida, faltando campos obrigatórios!"
+                  }
+              }
+          }
+      }
+    }
+  }
