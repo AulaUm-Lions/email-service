@@ -3,48 +3,60 @@
     "info": {
       "title": "Minha API TypeScript (Manual)",
       "version": "1.0.0",
-      "description": "Documentação da API definida manualmente em JSON."
+      "description": "Documentação da API de Envio de E-mails."
     },
     "servers": [
       {
-        "url": "http://localhost:4000/"
+        "url": "http://localhost:4000/api"
       }
     ],
     "components": {
       "schemas": {
-          "EmailRequest": {
+        "EmailRequest": {
+          "type": "object",
+          "required": ["to", "type"],
+          "properties": {
+            "to": {
+              "type": "string",
+              "format": "email",
+              "description": "Endereço de e-mail do destinatário.",
+              "example": "jean.mello@exemplo.com"
+            },
+            "type": {
+              "type": "string",
+              "description": "Tipo de template de e-mail a ser enviado.",
+              "enum": ["reset", "welcome", "notification"],
+              "example": "welcome"
+            },
+            "variables": {
               "type": "object",
-              "required": ["to", "type", "variables"],
-              "properties": {
-                  "to": {
-                      "type": "string",
-                      "format": "email",
-                      "example": "jean.mello@exemplo.com"
-                  },
-                  "type": {
-                    "type": "string",
-                    "format": "string",
-                    "example": "welcome"
-                  },
-                  "variables": {
-                    "type" : "object"
-                  }
+              "description": "Dados para preencher o template Handlebars (opcional).",
+              "additionalProperties": true,
+              "example": {
+                "name": "Jean Mello",
+                "token": "a1b2c3d4e5f6"
               }
-          },
-          "EmailResponse": {
-              "type": "object",
-              "properties": {
-                  "message": {
-                      "type": "string",
-                      "format": "message",
-                      "example": "Email enviado com sucesso"
-                  },
-                  "datasend": {
-                      "type": "string",
-                      "format": "date-time"
-                  }
-              }
+            }
           }
+        },
+        "ErrorResponse": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Mensagem de erro."
+            }
+          }
+        },
+        "SuccessResponse": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "E-mail 'welcome' enviado com sucesso."
+            }
+          }
+        }
       }
     },
     "paths": {
@@ -61,38 +73,55 @@
           }
         }
       },
-      "/api/email/send": {
-          "post": {
-              "summary": "Enviar um email",
-              "tags": [
-                  "Email"
-              ],
-              "requestBody": {
-                  "required": true,
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "$ref": "#/components/schemas/EmailRequest"
-                          }
-                      }
-                  }
-              },
-              "responses": {
-                  "200": {
-                      "description": "Email enviado com sucesso!",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/EmailResponse"
-                              }
-                          }
-                      }
-                  },
-                  "400": {
-                      "description": "Requisição inválida, faltando campos obrigatórios!"
-                  }
+      "/email/send": {
+        "post": {
+          "summary": "Enviar um e-mail com template",
+          "tags": [
+            "Email"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailRequest"
+                }
               }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "E-mail enviado com sucesso.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SuccessResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Requisição inválida. Campos 'to' ou 'type' estão faltando.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Erro interno do servidor ao tentar enviar o e-mail (falha de conexão SMTP, credenciais inválidas, etc.).",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
           }
+        }
       }
     }
   }
