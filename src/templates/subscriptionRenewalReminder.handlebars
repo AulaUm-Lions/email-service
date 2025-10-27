@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sua assinatura está prestes a expirar</title>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #111827;
+    "
+  >
+    {{> header }}
+
+    <table
+      role="presentation"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+      "
+    >
+      <tr>
+        <td style="padding: 40px 30px;">
+          <h2
+            style="
+              color: #0C2F59;
+              margin-top: 0;
+              margin-bottom: 20px;
+              font-size: 22px;
+            "
+          >
+            Sua assinatura está prestes a expirar ⏰
+          </h2>
+
+          <p style="font-size: 16px; line-height: 1.6; color: #374151;">
+            Olá <strong>{{name}}</strong>,
+          </p>
+
+          <p style="font-size: 16px; line-height: 1.6; color: #4b5563;">
+            Notamos que sua assinatura do plano
+            <strong>{{planName}}</strong> vai expirar em
+            <strong>{{daysLeft}}</strong> dia{{#if plural}}s{{/if}} —
+            no dia <strong>{{expirationDate}}</strong>.
+          </p>
+
+          <p style="font-size: 15px; color: #4b5563;">
+            Continue tendo acesso às suas aulas, certificados e conteúdos
+            exclusivos renovando sua assinatura agora mesmo.
+          </p>
+
+          <div
+            style="
+              text-align: center;
+              margin: 35px 0 25px 0;
+            "
+          >
+            <a
+              href="{{renewalLink}}"
+              style="
+                background-color: #0C2F59;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 14px 32px;
+                border-radius: 8px;
+                font-weight: bold;
+                display: inline-block;
+                font-size: 16px;
+              "
+              >Renovar minha assinatura</a
+            >
+          </div>
+
+          <div
+            style="
+              border-top: 1px solid #e5e7eb;
+              margin: 30px 0;
+            "
+          ></div>
+
+          <h3
+            style="
+              color: #0C2F59;
+              font-size: 18px;
+              margin-bottom: 10px;
+            "
+          >
+            Benefícios da renovação:
+          </h3>
+          <ul style="color: #374151; font-size: 15px; line-height: 1.6;">
+            <li>Acesso contínuo a todas as aulas e conteúdos premium</li>
+            <li>Certificados válidos e atualizados</li>
+            <li>Suporte prioritário</li>
+          </ul>
+
+          <p style="font-size: 15px; color: #6b7280; line-height: 1.6;">
+            Dúvidas? Nossa equipe de suporte está disponível para te ajudar:
+            <a
+              href="mailto:{{supportEmail}}"
+              style="color: #0C2F59; text-decoration: underline;"
+              >{{supportEmail}}</a
+            >.
+          </p>
+
+          <p
+            style="
+              font-size: 14px;
+              color: #0C2F59;
+              margin-top: 25px;
+              font-weight: bold;
+            "
+          >
+            Estamos ansiosos para te ver continuar aprendendo com a gente! 💙<br />
+            Equipe {{companyName}}
+          </p>
+        </td>
+      </tr>
+    </table>
+
+    {{> footer }}
+  </body>
+</html>
