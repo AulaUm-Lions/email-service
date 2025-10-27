@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redefinição de Senha</title>
+    <title>Confirmação de Compra</title>
   </head>
 
   <body
@@ -40,22 +40,55 @@
               font-size: 22px;
             "
           >
-            Redefinição de Senha
+            Compra Confirmada! 🎉
           </h2>
 
           <p style="font-size: 16px; line-height: 1.6; color: #374151;">
-            Oi {{name}}, recebemos uma solicitação para redefinir a senha da sua
-            conta na <strong>{{companyName}}</strong>.
+            Olá <strong>{{name}}</strong>,
           </p>
 
-          <p style="font-size: 15px; line-height: 1.6; color: #4b5563;">
-            Clique no botão abaixo para criar uma nova senha. Este link é válido
-            por <strong>{{expirationTime}}</strong>.
+          <p style="font-size: 16px; line-height: 1.6; color: #4b5563;">
+            Agradecemos por adquirir o curso
+            <strong>{{courseTitle}}</strong> na
+            <strong>{{companyName}}</strong>!
           </p>
+
+          <div
+            style="
+              margin: 25px 0;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+              padding: 20px;
+              background-color: #f9fafb;
+            "
+          >
+            <h3
+              style="
+                color: #0C2F59;
+                margin-top: 0;
+                font-size: 18px;
+                margin-bottom: 10px;
+              "
+            >
+              Detalhes da compra
+            </h3>
+            <p style="margin: 6px 0; font-size: 15px; color: #374151;">
+              <strong>Curso:</strong> {{courseTitle}}
+            </p>
+            <p style="margin: 6px 0; font-size: 15px; color: #374151;">
+              <strong>Instrutor:</strong> {{instructor}}
+            </p>
+            <p style="margin: 6px 0; font-size: 15px; color: #374151;">
+              <strong>Data da compra:</strong> {{purchaseDate}}
+            </p>
+            <p style="margin: 6px 0; font-size: 15px; color: #374151;">
+              <strong>Valor pago:</strong> R$ {{price}}
+            </p>
+          </div>
 
           <p style="text-align: center; margin: 30px 0;">
             <a
-              href="{{resetLink}}"
+              href="{{courseLink}}"
               style="
                 background-color: #f6a800;
                 color: #0C2F59;
@@ -66,35 +99,8 @@
                 display: inline-block;
                 font-size: 15px;
               "
-              >Redefinir Senha</a
+              >Acessar Curso</a
             >
-          </p>
-
-          <p style="font-size: 14px; color: #6b7280; margin-bottom: 10px;">
-            Se o botão não funcionar, copie e cole o link abaixo no seu
-            navegador:
-          </p>
-          <p
-            style="
-              font-size: 13px;
-              color: #0C2F59;
-              word-break: break-all;
-              margin-top: 5px;
-            "
-          >
-            {{resetLink}}
-          </p>
-
-          <p
-            style="
-              font-size: 14px;
-              line-height: 1.6;
-              color: #6b7280;
-              margin-top: 25px;
-            "
-          >
-            Se você não solicitou a redefinição de senha, pode ignorar este
-            e-mail com segurança. Sua conta permanecerá protegida.
           </p>
 
           <p
@@ -105,6 +111,7 @@
               font-weight: bold;
             "
           >
+            Bons estudos! <br />
             Equipe {{companyName}}
           </p>
         </td>

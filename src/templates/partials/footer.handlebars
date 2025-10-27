@@ -1,3 +1,75 @@
-<div class="footer">
-  <p>© {{year}} Minha Empresa. Todos os direitos reservados.</p>
-</div>
+<table
+  role="presentation"
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  style="margin-top: 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb;"
+>
+  <tr>
+    <td align="center" style="padding: 30px 20px;">
+      <table
+        role="presentation"
+        cellpadding="0"
+        cellspacing="0"
+        width="600"
+        style="max-width: 600px; text-align: center;"
+      >
+        <tr>
+          <td style="padding-bottom: 10px;">
+            <p
+              style="
+                font-family: Arial, sans-serif;
+                color: #0C2F59;
+                font-size: 14px;
+                margin: 0;
+                font-weight: 600;
+              "
+            >
+              <a
+                href="{{appUrl}}"
+                target="_blank"
+                style="color: #0C2F59; text-decoration: none;"
+              >
+                {{companyName}}
+              </a>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 8px;">
+            <p
+              style="
+                font-family: Arial, sans-serif;
+                color: #6b7280;
+                font-size: 13px;
+                margin: 0;
+              "
+            >
+              © {{year}} {{companyName}}. Todos os direitos reservados.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p
+              style="
+                font-family: Arial, sans-serif;
+                color: #9ca3af;
+                font-size: 12px;
+                margin: 0;
+              "
+            >
+              Você está recebendo este e-mail porque se cadastrou na nossa
+              plataforma.  
+              <a
+                href="{{unsubscribeUrl}}"
+                style="color: #F6A800; text-decoration: none;"
+                >Cancelar inscrição</a
+              >.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

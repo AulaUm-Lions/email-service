@@ -2,16 +2,17 @@ import nodemailer from "nodemailer";
 import path from "path";
 import { create } from "express-handlebars";
 import hbs from "nodemailer-express-handlebars";
-
+import { config } from "./env";
+ 
 export let transporter: nodemailer.Transporter;
 
 export async function initMailTransport() {
   transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: config.smtp_host,
+    port: config.smtp_port,
     auth: {
-      user: "a79ea12dc9f7d2",
-      pass: "****7a0c"
+      user: config.smtp_user,
+      pass: config.smtp_pass
     }
   });
 
