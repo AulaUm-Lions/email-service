@@ -16,14 +16,6 @@ export async function initMailTransport() {
     }
   });
 
-//   transporter = nodemailer.createTransport({
-//     host: 'smtp.ethereal.email',
-//     port: 587,
-//     auth: {
-//         user: 'celestine.wolff31@ethereal.email',
-//         pass: 'qZ4V6x2T1dZr7RR53Y'
-//     }
-// })
   console.log("✅ Transporter de e-mail configurado!");
 }
 
