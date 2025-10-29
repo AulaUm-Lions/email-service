@@ -6,7 +6,14 @@ export const config = {
   node_env: process.env.NODE_ENV,
   port: Number(process.env.PORT),
 
-  // 🔹 SMTP
+   // 🔹 Configuração do banco de dados
+  db_host: process.env.DB_HOST,
+  db_port: Number(process.env.DB_PORT),
+  db_database: process.env.DB_DATABASE,
+  db_user: process.env.DB_USER,
+  db_password: process.env.DB_PASSWORD,
+
+  // 🔹 Configuração de SMTP
   smtp_host: process.env.SMTP_HOST,
   smtp_port: Number(process.env.SMTP_PORT),
   smtp_user: process.env.SMTP_USER,
