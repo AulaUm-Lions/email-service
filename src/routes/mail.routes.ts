@@ -1,22 +1,14 @@
 import { Router } from "express";
-import { sendEmail } from "../services/mailService";
+import MailController from "../controllers/mail.controllers";
 
 const router = Router();
 
-router.post("/send", async (req, res) => {
-  try {
-    const { to, type, variables } = req.body;
-
-    if (!to || !type) {
-      return res.status(400).json({ error: "Campos 'to' e 'type' são obrigatórios." });
-    }
-
-    await sendEmail({ to, type, variables });
-    res.json({ message: `E-mail '${type}' enviado com sucesso.` });
-  } catch (error) {
-    console.error("Erro ao enviar e-mail:", error);
-    res.status(500).json({ error: "Falha ao enviar o e-mail." });
-  }
-});
+router.post('/reset', MailController.resetPassword);
+router.post('/welcome', MailController.welcome);
+router.post('/classInPersonReminder', MailController.classInPersonReminder);
+router.post('/classReminder', MailController.classReminder);
+router.post('/purchase', MailController.purchaseConfirmation);
+router.post('/plan', MailController.planSubscription);
+router.post('/reminderplan', MailController.subscriptionRenewalReminder);
 
 export default router;
