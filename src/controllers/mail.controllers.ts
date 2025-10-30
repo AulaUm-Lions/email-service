@@ -6,13 +6,13 @@ class MailController
 {
     async resetPassword(req: Request, res: Response) {
         try {
-          const { to, email } = req.body;
+          const { to , variables} = req.body;
       
-          if (!to || !email) {
-            return res.status(400).json({ error: "Campos 'to' e 'email' são obrigatórios." });
+          if (!to ) {
+            return res.status(400).json({ error: "Campos 'to' é obrigatório." });
           }
       
-          await sendEmail({ to, template : "reset", subject: "Redefinição de senha" });
+          await sendEmail({ to, template : "reset", subject: "Redefinição de senha", variables });
           return res.json({ message: `E-mail '${template}' enviado com sucesso.` });
         } catch (error) {
           console.error("Erro ao enviar e-mail:", error);
