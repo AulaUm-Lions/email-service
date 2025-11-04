@@ -1,14 +1,14 @@
 import { Router } from "express";
 import MailController from "../controllers/mail.controllers";
 
-const router = Router();
+const emailRoutes = Router();
 
-router.post('/reset', MailController.resetPassword);
-router.post('/welcome', MailController.welcome);
-router.post('/classInPersonReminder', MailController.classInPersonReminder);
-router.post('/classReminder', MailController.classReminder);
-router.post('/purchase', MailController.purchaseConfirmation);
-router.post('/plan', MailController.planSubscription);
-router.post('/reminderplan', MailController.subscriptionRenewalReminder);
+emailRoutes.post('/reset', MailController.resetPassword);
+emailRoutes.post('/welcome', MailController.welcome);
+emailRoutes.post('/classInPersonReminder', MailController.classInPersonReminder);
+emailRoutes.post('/classReminder', MailController.classReminder);
+emailRoutes.post('/purchase', MailController.purchaseConfirmation);
+emailRoutes.post('/plan', MailController.planSubscription);
+emailRoutes.post('/reminderplan', MailController.subscriptionRenewalReminder);
 
-export default router;
+export default emailRoutes;

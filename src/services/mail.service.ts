@@ -53,6 +53,7 @@ export async function sendEmail({ to, template, subject, variables = {} }: Email
   }
 
   try {
+    console.log(variables);
     await transporter.sendMail({
       from: '"Equipe de Suporte" <no-reply@aulaum.com>',
       to,

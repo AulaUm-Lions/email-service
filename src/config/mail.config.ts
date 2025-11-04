@@ -8,7 +8,7 @@ export let transporter: nodemailer.Transporter;
 
 export async function initMailTransport() {
   transporter = nodemailer.createTransport({
-    host: config.smtp_host,
+    host: config.smtp_host, 
     port: config.smtp_port,
     auth: {
       user: config.smtp_user,

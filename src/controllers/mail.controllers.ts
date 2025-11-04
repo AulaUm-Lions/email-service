@@ -36,13 +36,13 @@ class MailController
       };
       async classInPersonReminder(req: Request, res: Response) {
         try {
-          const { to } = req.body;
+          const { to, variables } = req.body;
       
           if (!to) {
             return res.status(400).json({ error: "Campos 'to' é obrigatórios." });
           }
       
-          await sendEmail({ to, template: "classInPersonReminder" ,subject: "Sua aula presencial começará em breve!" });
+          await sendEmail({ to, template: "classInPersonReminder" ,subject: "Sua aula presencial começará em breve!", variables });
           return res.json({ message: `E-mail '${template}' enviado com sucesso.` });
         } catch (error) {
           console.error("Erro ao enviar e-mail:", error);
