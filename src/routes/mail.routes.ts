@@ -7,8 +7,8 @@ emailRoutes.post('/reset', MailController.resetPassword);
 emailRoutes.post('/welcome', MailController.welcome);
 emailRoutes.post('/classInPersonReminder', MailController.classInPersonReminder);
 emailRoutes.post('/classReminder', MailController.classReminder);
-emailRoutes.post('/purchase', MailController.purchaseConfirmation);
-emailRoutes.post('/plan', MailController.planSubscription);
-emailRoutes.post('/reminderplan', MailController.subscriptionRenewalReminder);
+emailRoutes.post('/purchaseConfirmation', MailController.purchaseConfirmation);
+emailRoutes.post('/planSubscription', MailController.planSubscription);
+emailRoutes.post('/subscriptionRenewalReminder', MailController.subscriptionRenewalReminder);
 
 export default emailRoutes;
