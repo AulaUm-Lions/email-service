@@ -26,4 +26,9 @@ export const config = {
 
   // 🔹 URL base
   app_base_url: process.env.APP_BASE_URL,
+
+  // 🔹 Urls templates
+  app_dashboard_url: process.env.APP_DASHBOARD_URL,
+  app_support_email: process.env.APP_SUPPORT_EMAIL
+
 };

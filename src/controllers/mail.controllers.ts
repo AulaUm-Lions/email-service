@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { sendEmail } from "../services/mail.service";
 import { template } from 'handlebars';
+import { config } from '../config/env';
 
 class MailController
 {
     async resetPassword(req: Request, res: Response) {
         try {
-          const { to , variables} = req.body;
+          const { to , variables } = req.body;
       
           if (!to &&
               !variables.name &&
@@ -15,7 +16,7 @@ class MailController
            ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
           await sendEmail({ to, template : "reset", subject: "Redefinição de senha", variables });
           return res.json({ message: `E-mail resetPassword enviado com sucesso.` });
         } catch (error) {
@@ -33,7 +34,7 @@ class MailController
           ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
           await sendEmail({ to, template: "welcome", subject: "Bem-vindo(a) à nossa plataforma!" });
           return res.json({ message: `E-mail welcome enviado com sucesso.` });
         } catch (error) {
@@ -45,17 +46,18 @@ class MailController
         try {
           const { to, variables } = req.body;
       
-          if ( !to &&
-            !variables.name &&
-            !variables.classTitle &&
-            !variables.classDate &&
-            !variables.classTime &&
-            !variables.instructorName &&
-            !variables.locationName &&
-            !variables.address ) {
+          if (!to &&
+              !variables.name &&
+              !variables.classTitle &&
+              !variables.classDate &&
+              !variables.classTime &&
+              !variables.instructorName &&
+              !variables.locationName &&
+              !variables.address ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
+          variables.app_support_email=config.app_support_email;
           await sendEmail({ to, template: "classInPersonReminder" ,subject: "Sua aula presencial começará em breve!", variables });
           return res.json({ message: `E-mail classInPersonReminder enviado com sucesso.` });
         } catch (error) {
@@ -72,12 +74,12 @@ class MailController
               !variables.classTitle &&
               !variables.clasDate &&
               !variables.classTime &&
-              !variables.instructorName &&
-              !variables.classLink
+              !variables.instructorName 
           ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
+          variables.app_support_email=config.app_support_email;
           await sendEmail({ to, template: "classReminder", subject: "Lembrete da sua aula online", variables });
           return res.json({ message: `E-mail classReminder enviado com sucesso.` });
         } catch (error) {
@@ -89,19 +91,19 @@ class MailController
         try {
           const { to, variables } = req.body;
       
-          if (!to&&
+          if (!to &&
               !variables.name &&
               !variables.planName &&
               !variables.startDate &&
               !variables.nextBillingDate &&
               !variables.price &&
               !variables.billingCycle &&
-              !variables.paymentMethod &&
-              !variables.dashboardLink
+              !variables.paymentMethod
           ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
+          variables.app_support_email=config.app_support_email;
           await sendEmail({ to, template: "planSubscription", subject: "Confirmação de assinatura de plano", variables });
           return res.json({ message: `E-mail planSubscription enviado com sucesso.` });
         } catch (error) {
@@ -118,12 +120,11 @@ class MailController
               !variables.courseTitle &&
               !variables.instructor &&
               !variables.purchaseDate &&
-              !variables.price &&
-              !variables.courseLink
+              !variables.price
           ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
           await sendEmail({ to, template: "purchaseConfirmation", subject: "Confirmação de compra de aula/curso", variables });
           return res.json({ message: `E-mail purchaseConfirmation enviado com sucesso.` });
         } catch (error) {
@@ -144,7 +145,8 @@ class MailController
           ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
-      
+          variables.app_dashboard_url=config.app_dashboard_url;
+          variables.app_support_email=config.app_support_email;
           await sendEmail({ to, template: "subscriptionRenewalReminder", subject: "Sua assinatura está prestes a expirar", variables });
           return res.json({ message: `E-mail subscriptionRenewalReminder enviado com sucesso.` });
         } catch (error) {
