@@ -28,14 +28,13 @@ class MailController
         try {
           const { to, variables } = req.body;
       
-          if (!to &&
-              !variables.name &&
-              !variables.dashboardUrl
+          if (!to ||
+              !variables.name
           ) {
             return res.status(400).json({ error: "Campos 'to' e 'variables' são obrigatórios." });
           }
           variables.app_dashboard_url=config.app_dashboard_url;
-          await sendEmail({ to, template: "welcome", subject: "Bem-vindo(a) à nossa plataforma!" });
+          await sendEmail({ to, template: "welcome", subject: "Bem-vindo(a) à nossa plataforma!", variables });
           return res.json({ message: `E-mail welcome enviado com sucesso.` });
         } catch (error) {
           console.error("Erro ao enviar e-mail:", error);
