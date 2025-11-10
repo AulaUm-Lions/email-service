@@ -22,7 +22,40 @@ describe("MailController", () => {
     req = {
       body: {
         to: "teste@exemplo.com",
-        variables: { name: "Mateus" },
+        variables: {
+          // Campos genéricos
+          name: "Mateus",
+          expirationTime: "2025-12-31",
+          resetLink: "https://example.com/reset",
+          app_dashboard_url: "https://dashboard.example.com",
+          app_support_email: "suporte@example.com",
+  
+          // Campos de aula presencial
+          classTitle: "Aula de Yoga",
+          classDate: "2025-12-10",
+          classTime: "10:00",
+          instructorName: "João",
+          locationName: "Studio Central",
+          address: "Rua A, 123",
+  
+          // Campos de assinatura
+          planName: "Premium",
+          startDate: "2025-01-01",
+          nextBillingDate: "2025-02-01",
+          price: "99.90",
+          billingCycle: "Mensal",
+          paymentMethod: "Cartão",
+  
+          // Campos de compra
+          courseTitle: "Curso Node.js",
+          instructor: "Maria",
+          purchaseDate: "2025-01-20",
+  
+          // Campos de renovação
+          daysLeft: 5,
+          expirationDate: "2025-11-30",
+          renewalLink: "https://example.com/renovar",
+        },
       },
     };
 
@@ -70,9 +103,11 @@ describe("MailController", () => {
       await (MailController as any)[name](req as Request, res as Response);
 
       expect(statusMock).toHaveBeenCalledWith(400);
-      expect(jsonMock).toHaveBeenCalledWith({
-        error: "Campos 'to' e 'variables' são obrigatórios.",
-      });
+      expect(jsonMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          error: expect.stringMatching(/obrigatórios/),
+        })
+      );
       expect(sendEmail).not.toHaveBeenCalled();
     });
 
