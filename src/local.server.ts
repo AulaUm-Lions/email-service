@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { initMailTransport, configureTemplateEngine } from "./config/mail.config";
-import { app } from "./app";
+import app from "./app";
 
 async function bootstrap() {
   try {

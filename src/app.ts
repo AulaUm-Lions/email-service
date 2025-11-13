@@ -41,4 +41,4 @@ app.use("/api", routes); // ✅ prefixo opcional para padronizar
 // Tratativa de erros da aplicação
 app.use(errorHandling);
 
-export { app };
+export default  app ;
