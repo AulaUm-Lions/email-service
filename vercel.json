@@ -1,18 +1,14 @@
 {
-    "builds": [
-        {
-            "src": "src/app.ts",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": ["dist/**"]
-            }
-        }
-    ],
+    "version": 2,
+    "functions": {
+      "api/index.ts": {
+        "runtime": "nodejs18.x",
+        "launcherType": "Nodejs",
+        "binary": "ts-node/register"
+      }
+    },
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/src/app.ts"
-        }
-    ],
-    "outputDirectory": "dist"
-}
+      { "src": "/(.*)", "dest": "/api/index.ts" }
+    ]
+  }
+  
