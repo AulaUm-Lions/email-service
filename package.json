@@ -1,14 +1,14 @@
 {
   "name": "email-service",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "jest --passWithNoTests --runInBand",
     "start:dev": "cross-env NODE_ENV=dev nodemon --exec ts-node src/server.ts",
     "start:hml": "cross-env NODE_ENV=hml nodemon --exec ts-node src/server.ts",
     "start:prd": "cross-env NODE_ENV=prd node dist/server.js",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
