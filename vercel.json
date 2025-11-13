@@ -1,7 +1,7 @@
 {
     "builds": [
         {
-            "src": "api/**/*.js",
+            "src": "src/app.ts",
             "use": "@vercel/node",
             "config": {
                 "includeFiles": ["dist/**"]
@@ -11,7 +11,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/api/app.ts"
+            "dest": "/src/app.ts"
         }
     ],
     "outputDirectory": "dist"
