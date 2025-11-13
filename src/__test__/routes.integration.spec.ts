@@ -1,6 +1,6 @@
 // src/__tests__/routes.test.ts
 import request from "supertest";
-import { app } from "../app";
+import app from "../app";
 
 // Mock do serviço de envio de e-mail
 jest.mock("../services/mail.service", () => ({
