@@ -31,7 +31,7 @@ app.use("/api-docs", swagger.serve, swagger.setup(null, {
 }));
 
 // REMOVE prefixo "/api"
-app.use("/", routes);
+app.use("/api", routes);
 
 // erros
 app.use(errorHandling);
