@@ -1,6 +1,7 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import app from '../src/app';
-import { initMailTransport, configureTemplateEngine } from '../src/config/mail.config';
+import { VercelRequest, VercelResponse } from "@vercel/node";
+import app from "../src/app";
+
+import { initMailTransport, configureTemplateEngine } from "../src/config/mail.config";
 
 let initialized = false;
 
@@ -13,8 +14,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     return app(req, res);
-  } catch (error) {
-    console.error("❌ Erro no servidor:", error);
-    return res.status(500).json({ error: "Erro interno no servidor" });
+  } catch (err) {
+    console.error("❌ Erro interno da função", err);
+    return res.status(500).json({ error: "Erro interno do servidor" });
   }
 }
