@@ -1,9 +1,14 @@
 {
-    "version": 3,
-    "routes": [
+    "version": 2,
+    "functions": {
+      "api/index.ts": {
+        "runtime": "nodejs20.x"
+      }
+    },
+    "rewrites": [
       {
-        "src": "/(.*)",
-        "dest": "/api/index.js"
+        "source": "/(.*)",
+        "destination": "/api/index.ts"
       }
     ]
   }
