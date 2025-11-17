@@ -23,7 +23,7 @@ class Database
         };
 
         this.pool = new Pool(poolConfig);
-    }
+    };
 
     async query(sql: string, values?: any[]): Promise<DatabaseResult>
     {
@@ -41,14 +41,14 @@ class Database
                 error: error as Error
             }
         }
-    }
+    };
 
     async end(): Promise<void>
     {
         await this.pool.end();
         console.log('Conexão com banco de dados encerrada!');
     }
-}
+};
 
 const database = new Database();
-export { database };
+export default database;
