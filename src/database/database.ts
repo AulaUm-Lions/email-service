@@ -1,14 +1,15 @@
-import pkg from "pg";
+
+import { Pool, PoolConfig, QueryResult } from "pg";
 import { config } from "../config/env";
 import { Database as DatabaseResult } from "../interfaces/database.interface";
 
-const { Pool } = pkg;
+class Database
+{
+    private pool: Pool;
 
-class Database {
-    private pool: InstanceType<typeof Pool>;
-
-    constructor() {
-        this.pool = new Pool({
+    constructor()
+    {
+        const poolConfig: PoolConfig = {
             host: config.db_host,
             port: Number(config.db_port),
             database: config.db_database,
@@ -19,27 +20,32 @@ class Database {
             },
             max: 20,
             idleTimeoutMillis: 30000
-        });
+        };
+
+        this.pool = new Pool(poolConfig);
     }
 
-    async query(sql: string, values?: any[]): Promise<DatabaseResult> {
+    async query(sql: string, values?: any[]): Promise<DatabaseResult>
+    {
         try {
-            const result = await this.pool.query(sql, values);
+            const result: QueryResult = await this.pool.query(sql, values);
+
             return {
                 status: true,
                 data: result.rows
-            };
+            }
         } catch (error) {
             return {
                 status: false,
                 data: [],
                 error: error as Error
-            };
+            }
         }
 
-    async end(): Promise<void> {
+    async end(): Promise<void>
+    {
         await this.pool.end();
-        console.log("Conexão com banco de dados encerrada!");
+        console.log('Conexão com banco de dados encerrada!');
     }
 // ... (restante do código de query e end)
 }
