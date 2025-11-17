@@ -36,12 +36,12 @@ class Database {
                 error: error as Error
             };
         }
-    }
 
     async end(): Promise<void> {
         await this.pool.end();
         console.log("Conexão com banco de dados encerrada!");
     }
+// ... (restante do código de query e end)
 }
 
 const database = new Database();
