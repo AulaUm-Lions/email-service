@@ -15,7 +15,7 @@ export async function sendEmail({ to, template, subject, variables = {} }: Email
       from: '"Equipe de Suporte" <suporte@aulaum.com>',
       to,
       subject,
-      template: template, // o nome do arquivo handlebars (ex: reset.handlebars)
+      template: template, // o nome do arquivo handlebars
       context: variables,
     } as any);
   } catch (err) {
