@@ -1,6 +1,7 @@
 # Ignorar as seguintes pastas
 /dist
 /node_modules
+/app
 
 # Ignorar os seguintes arquivos
 .env
